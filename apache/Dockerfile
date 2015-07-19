@@ -21,6 +21,11 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_UPS
 	&& rm wordpress.tar.gz \
 	&& chown -R www-data:www-data /usr/src/wordpress
 
+COPY wp-content/themes/ /usr/src/wordpress/wp-content/themes/
+COPY wp-content/plugins/ /usr/src/wordpress/wp-content/plugins/
+COPY wp-content/uploads/ /usr/src/wordpress/wp-content/uploads/
+RUN chown -R www-data:www-data /usr/src/wordpress
+
 COPY docker-entrypoint.sh /entrypoint.sh
 
 # grr, ENTRYPOINT resets CMD now
